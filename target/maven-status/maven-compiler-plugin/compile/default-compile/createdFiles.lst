@@ -1,0 +1,10 @@
+club\aurovion\aegis\PlayerData.class
+club\aurovion\aegis\AegisCommand.class
+club\aurovion\aegis\AegisSettings$1.class
+club\aurovion\aegis\ViolationManager.class
+club\aurovion\aegis\Aegis.class
+club\aurovion\aegis\Check.class
+club\aurovion\aegis\AegisSettings.class
+club\aurovion\aegis\CombatListener.class
+club\aurovion\aegis\MovementListener.class
+club\aurovion\aegis\ConnectionListener.class

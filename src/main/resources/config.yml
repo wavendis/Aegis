@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────
+#  Aegis  ·  by Aurovion  ·  https://aurovion.club
+#  Lightweight server-side anti-cheat foundation.
+#
+#  NOTE: Aegis is a heuristic, no-dependency anti-cheat. It catches blatant
+#  cheating with conservative thresholds tuned to avoid false positives.
+#  It is not a packet-level system like Grim/Vulcan — raise thresholds if
+#  legitimate players are ever flagged.
+# ─────────────────────────────────────────────────────────────
+
+# Players with OP are exempt from all checks.
+exempt-ops: true
+
+# Also print each violation to the server console.
+alert-console: true
+
+# Grace period (ms) after a teleport/respawn where movement checks are skipped.
+teleport-grace-ms: 1500
+
+# How fast violation levels (VL) decay, per second.
+decay-per-second: 0.25
+
+checks:
+  # Horizontal movement speed. Conservative by design.
+  speed:
+    enabled: true
+    # Max horizontal blocks/tick before it counts against the buffer.
+    # Sprint-jump is ~0.36; the Speed potion allowance is added automatically.
+    max-horizontal: 0.45
+    # Consecutive over-limit moves tolerated before a flag is raised.
+    buffer: 6
+    vl-per-flag: 1.0
+    punish-at: 15
+
+  # Illegal sustained ascent / hovering while airborne.
+  fly:
+    enabled: true
+    # Airborne ticks of non-falling motion before flagging (a jump lasts ~10).
+    air-ticks: 14
+    vl-per-flag: 1.0
+    punish-at: 12
+
+  # Combat reach — distance from the eye to the target's hitbox.
+  reach:
+    enabled: true
+    # Vanilla survival reach is ~3.0 blocks; the small buffer avoids latency FPs.
+    max-distance: 3.15
+    vl-per-flag: 1.0
+    punish-at: 8
+
+# Console commands run when a check reaches its punish-at threshold.
+# %player% is replaced with the offender's name.
+punishments:
+  commands:
+    - "kick %player% &cKicked by Aegis — suspicious activity."

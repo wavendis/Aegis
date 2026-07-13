@@ -68,4 +68,3 @@ compile-only `paper-api` dependency.
 ---
 
 © Aurovion. Provided as-is.
-
